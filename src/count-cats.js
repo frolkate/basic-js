@@ -15,15 +15,17 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function countCats(backyard) {
-  //throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-let number = 0;
+  let number = 0;
+
+  if (Array.isArray(backyard)){
+
 
 for(let i = 0; i < backyard.length; i ++){
   for(let j = 0; j < backyard[i].length; j ++){
   if(backyard[i][j] != null && backyard[i][j][0] == '^' && backyard[i][j][1] == '^') number ++;
   }
 }
+  }
 return number;
 }
 
