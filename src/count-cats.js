@@ -20,7 +20,9 @@ function countCats(backyard) {
 let number = 0;
 
 for(let i = 0; i < backyard.length; i ++){
-  if(backyard[i] = '^^') number ++;
+  for(let j = 0; j < backyard.length; j ++){
+  if(backyard[i][j][0] == '^' && backyard[i][j][1] == '^') number ++;
+  }
 }
 return number;
 }
