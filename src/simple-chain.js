@@ -18,36 +18,37 @@ const { NotImplementedError } = require('../extensions/index.js');
     this.count ++;
     return this;
   },
+
   removeLink(position) {
-   if(typeof position != 'number' || position == 0 || position > this.count){
-      throw new Error ("You can't remove incorrect link!");
 
+   if(typeof position != 'number' || position <= 0 || position > this.count){
+    throw new Error ('You can\'t remove incorrect link!');
     }
-    else{
 
-        let arr = this.chain.split('~');
+
+       let arr = this.chain.split('~');
 
        arr.splice(2 * (position - 1), 2);
        this.chain = arr.join('~');
+       this.count --;
 
-        this.count --;
-
-    }
     return this;
   },
   reverseChain() {
     this.chain = this.chain.split('~').reverse().join('~');
     return this;
   },
+
+
   finishChain() {
    this.chain = this.chain.slice(-this.chain.length + 1);
    this.chain = this.chain.slice(0, -1);
-   try{
-   return this.chain;
-   }
-   catch(e){
-    this.chain = '';
-   }
+
+   let str = this.chain;
+   this.chain = '';
+   this.count = 0;
+   return str;
+
   }
 };
 
