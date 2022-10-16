@@ -17,6 +17,8 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function repeater(str, options ) {
 
+  if(typeof str == 'boolean' || str === null)
+  str = String(str);
 
   let separator = '';
    if( options.separator == undefined)
@@ -43,6 +45,9 @@ function repeater(str, options ) {
   else
     repeatTimes= options.repeatTimes;
 
+
+    if (options.addition === null)
+    options.addition = String(options.addition);
 
   for(let i = 0; i < additionRepeatTimes; i ++){
 
