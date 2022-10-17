@@ -14,14 +14,13 @@ const { NotImplementedError } = require('../extensions/index.js');
 function getSeason(date) {
 
 
-  console.log(date);
-
- if (Date.parse (date) == NaN){
-  throw new Error ( 'Inavalid date!');
+ if (Object.prototype.toString.call(date) != '[object Date]'){
+  return 'Inavalid date!';
  }
- else {
-
-  try {
+ else if(date == null)
+ return 'Unable to determine the time of year!';
+ else
+ {
 
     let month = date.getMonth();
 
@@ -33,11 +32,8 @@ function getSeason(date) {
       case(8 <= month && month < 11): return 'autumn';break;
       }
     }
-    catch(e){
-      return 'Unable to determine the time of year!';
-    }
 
-  }
+
 
 }
 
