@@ -49,6 +49,15 @@ class VigenereCipheringMachine {
     'Y': [],
     'Z': []
   }
+ type = true;
+
+  constructor(value){
+    if(value == false) this.type = false;
+    else
+    return this.type = true;
+  }
+
+
      setVigenereSquare (){
 
 
@@ -73,16 +82,19 @@ class VigenereCipheringMachine {
 
 
   encrypt(message, key) {
-
-    this.setVigenereSquare();
-
-    //console.log(this.vigenereSquare['D']);
-  // console.log(this.vigenereSquare['A'].indexOf(''));
-    let lengthWord = message.length;
+    console.log(message, key);
     let word = '';
     let i = 0;
     let encryptWord = '';
     let j = 0;
+
+    if(message == undefined || key == undefined || message == null || key == null)
+    return 'Incorrect arguments!';
+    else {
+    this.setVigenereSquare();
+    let lengthWord = message.length;
+
+
 
     while(word.length < lengthWord){
 
@@ -114,9 +126,71 @@ class VigenereCipheringMachine {
              encryptWord+= word[i];
         }
 
-    return encryptWord;
+        if(this.type == false){
+          return encryptWord.split().reverse().join();
+          }
+          else
+        return encryptWord;
+
+      }
+
+
+
   }
+
   decrypt(encryptedMessage, key) {
+
+
+    let word = '';
+    let i = 0;
+    let decryptWord = '';
+    let j = 0;
+
+    if(encryptedMessage == undefined || key == undefined || encryptedMessage == null || key == null)
+    return 'Incorrect arguments!';
+    else {
+    if (this.vigenereSquare['A'] == 0)
+    this.setVigenereSquare();
+
+   let lengthWord = encryptedMessage.length;
+
+
+  while(word.length < lengthWord){
+
+     if(this.isLetter(encryptedMessage[j])){
+       word += key[i];
+     }
+     else {
+       console.log(i);
+       word += encryptedMessage[j];
+       i--;
+     }
+     j++;
+     if(i == key.length - 1 ) i = 0;
+     else i ++;
+
+     }
+
+   encryptedMessage = encryptedMessage.toUpperCase();
+   word = word.toUpperCase();
+
+   for(let i = 0; i < lengthWord; i ++){
+          if(this.isLetter(encryptedMessage[i])){
+
+ let ind = this.vigenereSquare[word[i]].indexOf(encryptedMessage[i]);
+         decryptWord+= this.vigenereSquare['A'][ind];
+          }
+         else
+            decryptWord+= encryptedMessage[i];
+       }
+       if(this.type == false){
+        return decryptWord.split().reverse().join();
+        }
+        else
+      return decryptWord;
+
+  }
+
 
   }
 }
